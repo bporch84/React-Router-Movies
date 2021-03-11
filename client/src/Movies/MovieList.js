@@ -1,4 +1,6 @@
 import React from 'react';
+import { useHistory } from "react-router-dom"
+// I will be using useHistory to push the ids onto the history stack.
 
 export default function MovieList(props) {
   return (
@@ -13,8 +15,14 @@ export default function MovieList(props) {
 function MovieDetails(props) {
   const { title, director, metascore } = props.movie;
 
+  let history = useHistory();
+
+  function historyPush() {
+    history.push(`/movies/${props.movie.id}`)
+  }
+
   return (
-    <div className="movie-card">
+    <div onClick={historyPush} className="movie-card">
       <h2>{title}</h2>
       <div className="movie-director">
         Director: <em>{director}</em>
@@ -23,5 +31,6 @@ function MovieDetails(props) {
         Metascore: <strong>{metascore}</strong>
       </div>
     </div>
+   
   );
 }
